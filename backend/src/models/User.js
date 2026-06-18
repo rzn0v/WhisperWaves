@@ -1,9 +1,9 @@
-import mongoose, { mongo } from "mongoose"
+import mongoose from "mongoose"
 
 //user schema
 const userSchema = new mongoose.Schema({
     
-    clerkID: {
+    clerkId: {
         type: String,
         required: true,
         unique: true,
