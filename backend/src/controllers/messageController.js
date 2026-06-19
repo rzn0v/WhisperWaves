@@ -1,4 +1,6 @@
+import { getReceiverSocketId } from "../lib/socket.js";
 import User from "../models/User.js";
+import { hasImageKitConfig, uploadChatMedia } from "../lib/imagekit.js";
 import Message from "../models/message.js";
 
 export async function getUsersForSidebar(req, res) {
@@ -58,7 +60,7 @@ export async function getMessages(req, res){
                 {senderId: userToChatId, receiverId: myId},
             ]
         }).sort({createdAt:1})
-        res.status(200).jsson(messages);
+        res.status(200).json(messages);
     }catch(error){
         console.error("Error in getMessages:", error.message);
         res.status(500).json({message: "Internal Server Error"});
@@ -94,7 +96,12 @@ export async function sendMessage(req, res){
 
         await newMessage.save()
 
-        //todo: realtime with socketio
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        //only send the message in realtime if user is online
+        if(receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
+
         res.status(201).json(newMessage);
     }catch(error){
         res.status(500).json({ message: "Internal Server Error"});
