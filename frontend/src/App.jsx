@@ -9,6 +9,9 @@ function App() {
 
   const { isSignedIn, isLoaded } = useAuth();
 
+  //todo: Make this a better component
+  if(!isLoaded) return <p>Loading...</p>;
+
   return (
     <ThemeProvider>
     <WallpaperProvider>
