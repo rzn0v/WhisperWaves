@@ -1,22 +1,23 @@
-import './App.css'
-import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
-
-
+import { WallpaperProvider } from "./context/WallpaperContext.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
+import ChatPage from './pages/ChatPage.jsx';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import AuthPage from './pages/AuthPage.jsx';
+import { useAuth } from "@clerk/react";
+ 
 function App() {
 
+  const { isSignedIn, isLoaded } = useAuth();
+
   return (
-    <div>
-      <h1>WhisperWave</h1>
-      <header>
-        <Show when="signed-out">
-          <SignInButton mode="modal" />
-          <SignUpButton mode="modal" />
-        </Show>
-        <Show when="signed-in">
-          <UserButton />
-        </Show>
-      </header>
-    </div>
+    <ThemeProvider>
+    <WallpaperProvider>
+      <Routes>
+        <Route path="/" element={isSignedIn ? <ChatPage /> : <Navigate to={"/auth"} replace />}/>
+        <Route path="/auth" element={!isSignedIn ? <AuthPage /> : <Navigate to={"/chat"} replace/>}/>
+      </Routes>
+    </WallpaperProvider>
+    </ThemeProvider>
   )
 }
 
