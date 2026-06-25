@@ -66,7 +66,7 @@ function ChatSidebar() {
     >
       <div className="shrink-0 border-b border-border px-2 pb-2 pt-2.5 sm:px-3 sm:pt-3">
         <div className="flex items-center gap-2 px-0.5 sm:gap-2.5 sm:px-1">
-          <AppLogo size={60} className="shrink-0 rounded-[9px]" alt="" />
+          <AppLogo size={70} className="shrink-0 rounded-[9px]" alt="" />
           <p className="flex-1 truncate text-lg font-bold tracking-tight sm:text-[18px]">
             {APP_NAME}
           </p>
