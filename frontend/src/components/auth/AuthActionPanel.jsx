@@ -20,7 +20,7 @@ export function AuthActionPanel() {
   return (
     <section className="relative flex flex-1 flex-col items-stretch justify-center overflow-hidden px-5 py-16 sm:px-10 md:px-14 md:py-14 lg:px-16">
       <AuthCardShell>
-        <div className="min-h-[420px] flex flex-col justify-center">
+        <div className="min-h-105 flex flex-col justify-center">
           <div className="mb-10 flex flex-col items-center text-center">
             <div className="mb-6">
               <AppLogo size={200} alt="" />
