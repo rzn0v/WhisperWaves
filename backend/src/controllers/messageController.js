@@ -1,4 +1,4 @@
-import { getReceiverSocketId } from "../lib/socket.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 import User from "../models/User.js";
 import { hasImageKitConfig, uploadChatMedia } from "../lib/imagekit.js";
 import Message from "../models/message.js";
@@ -104,6 +104,7 @@ export async function sendMessage(req, res){
 
         res.status(201).json(newMessage);
     }catch(error){
+        console.error("Error in sendMessage:", error);
         res.status(500).json({ message: "Internal Server Error"});
     }
 }
